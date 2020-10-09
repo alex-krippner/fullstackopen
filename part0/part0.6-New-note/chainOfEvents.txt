@@ -1,0 +1,21 @@
+actor user
+user->browser: user submits form
+
+note over browser: 
+browser executes js-code:
+- default browser form handling is prevented
+- creates a new note, adds it to the note list,
+and rerenders the note list on the page
+- sends new note as JSON-data to server
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server creates a new 'note' object
+and pushes it to a 'notes' array 
+end note
+
+server-->browser: server responds with status code 201 created
+
+

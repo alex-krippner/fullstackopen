@@ -1,3 +1,11 @@
+actor user
+user->browser: user submits form
+
+note over browser: 
+browser submits form 
+as specified in method and action
+end note
+
 browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
 
 note over server:
@@ -10,9 +18,9 @@ end note
 server-->browser: URL redirect
 browser->server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML-code
-browser->server: https://studies.cs.helsinki.fi/exampleapp/main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
 server-->browser: main.css
-browser->server: https://studies.cs.helsinki.fi/exampleapp/main.js
+browser->server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 server-->browser: main.js
 
 note over browser:
