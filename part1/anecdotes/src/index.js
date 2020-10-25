@@ -14,9 +14,8 @@ const App = ({anecdotes}) => {
   const [votes, setVotes] = useState([...initialArray])
 
   const handleRandomAnecdote = () =>  {
-
-    setSelected(getRandomNum(0, anecdotes.length-1)); 
-    console.log(votes)
+    const randomAnectodeIdx = getRandomNum(0, anecdotes.length-1)
+    setSelected(randomAnectodeIdx); 
   }
 
   const handleVote = (selected) =>{
@@ -24,6 +23,7 @@ const App = ({anecdotes}) => {
     votesCopy[selected] += 1
     setVotes(votesCopy);     
 }
+
 const mostVotes =  Math.max(...votes);
 const indexOfMostVotedAnecdote = votes.findIndex(el => el === mostVotes);
 

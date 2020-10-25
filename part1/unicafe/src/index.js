@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 const Button = ({btnType, handleClick}) => <button onClick={() => handleClick(btnType)}>{btnType}</button>;
 const Statistic = ({stat, text}) => <p>{text} {stat}</p>
 
-const Statistics = ({stateObj}) => {
-  const {good, neutral, bad} = stateObj;
+const Statistics = ({ratings}) => {
+  const {good, neutral, bad} = ratings;
 
   const calc = (calcType) => {
     let result;
@@ -22,61 +22,62 @@ const Statistics = ({stateObj}) => {
 
   return(
     <table>
-      <tr>
-        <td>
-          <Statistic stat={good} text='good'/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Statistic stat={neutral} text='neutral'/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Statistic stat={bad} text='bad'/> 
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Statistic stat={calc('all')} text='all'/> 
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Statistic stat={calc('avg')} text='average'/> 
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Statistic stat={calc('pos')} text='positive'/> 
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>
+            <Statistic stat={good} text='good'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Statistic stat={neutral} text='neutral'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Statistic stat={bad} text='bad'/> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Statistic stat={calc('all')} text='all'/> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Statistic stat={calc('avg')} text='average'/> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Statistic stat={calc('pos')} text='positive'/> 
+          </td>
+        </tr>
+      </tbody>
     </table>
     )
 }
 
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
-  const stateObj = {good, neutral, bad }
+  const [ratings, setRating] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  })
   const buttonArray = ['good', 'neutral', 'bad'];
 
   const handleClick = (btnType) => {
-    if (btnType === 'good') setGood(good + 1);
-    if (btnType === 'neutral') setNeutral(neutral + 1);
-    if (btnType === 'bad') setBad(bad + 1);
+    if (btnType === 'good') setRating({...ratings, good: ratings.good + 1});
+    if (btnType === 'neutral') setRating({...ratings, neutral: ratings.neutral + 1});
+    if (btnType === 'bad') setRating({...ratings, bad: ratings.bad + 1});
   }
 
   return (
     <div>
       <h2>give feedback</h2>
-      {buttonArray.map(btnType => <Button btnType={btnType} handleClick={handleClick}/>)}
+      {buttonArray.map(btnType => <Button key={btnType} btnType={btnType} handleClick={handleClick}/>)}
       <h2>statistics</h2>
-      {(good + neutral + bad) === 0 ? (<p>No feedback given</p>) : (<Statistics stateObj={stateObj}/>)}
+      {(ratings.good + ratings.neutral + ratings.bad) === 0 ? (<p>No feedback given</p>) : (<Statistics ratings={ratings}/>)}
     </div>
   )
 }
