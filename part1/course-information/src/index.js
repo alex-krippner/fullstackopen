@@ -14,8 +14,12 @@ const Content = (props) => {
 
   return(
     <>
-    {props.course.parts.map(part => <Part key={part.name} part={part.name} exercise={part.exercises}/>
-      )} 
+      {
+        props.course.parts.map(
+          part => 
+            <Part key={part.name} part={part.name} exercise={part.exercises}/>
+          )
+      } 
     </>
     )
 }
@@ -56,3 +60,4 @@ const App = () => {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
+
