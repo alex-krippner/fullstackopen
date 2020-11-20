@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs/
+Content-Type: application/json 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWFsIiwiaWQiOiI1ZmI3OTljYjdjY2JiYzNjYjg4MTEyOTQiLCJpYXQiOjE2MDU4NjgwOTd9.Bft7TrBGiBJagIS3JoW0fu90Cy_SaU7oXfxMvuqBdZo
+
+{
+  "title": "dog",
+  "author": "jalei",
+  "url": "someurl",
+  "likes": 2,
+  "userId": "5fb799cb7ccbbc3cb8811294"
+}
